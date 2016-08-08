@@ -2,25 +2,23 @@ var _ = require("lodash");
 
 var analyze_this = function(freelancers) {
 
-  total_income = _.reduce(freelancers, (sum, freelancer) => {
+  avg_income = _.reduce(freelancers, (sum, freelancer) => {
     return sum += freelancer.income
-  },0) 
+  },0) / _.size(freelancers)
 
+  underperform =_.chain(freelancers)
+    .filter(freelancer => freelancer.income <= avg_income)
+    .sortBy('income')
 
-  var avg_income = total_income / _.size(freelancers)
+  overperform = _.chain(freelancers)
+    .filter(freelancer => freelancer.income > avg_income)
+    .sortBy('income')
 
-  var underperform = _.filter(freelancers, freelancer => {
-    return freelancer.income < avg_income
-  })
-
-  var overperform = _.filter(freelancers, freelancer => {
-    return freelancer.income > avg_income
-  })
-
-  return { average: avg_income, 
-           underperform: _.sortBy(underperform, 'income'),
-           overperform: _.sortBy(overperform, 'income') }
-  
+  return { 
+    average: avg_income, 
+    underperform: underperform, 
+    overperform: overperform 
+  }
 }
 
 module.exports = analyze_this
