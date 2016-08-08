@@ -1,19 +1,15 @@
 var _ = require("lodash");
 
 var groupComments = function(comments) {
-  var grouped = _.groupBy(comments, 'username');
 
   var result = []
+  var grouped = _.groupBy(comments, 'username');
 
   for (var user in grouped) {
-  
-   var sub_result = {}
-   var comment_count = _.size(grouped[user]) 
 
-   sub_result['username'] = user
-   sub_result['comment_count'] = comment_count
+   var total_comments = _.size(grouped[user]) 
 
-   result.push(sub_result)
+   result.push({ username: user, comment_count: total_comments })
   }
 
   return result.reverse()
