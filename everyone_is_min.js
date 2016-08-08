@@ -15,9 +15,7 @@ var SortCitiesByTemp = function(cities) {
   return result
 }
 
-function isTempHot(temp) {
-  return temp > 19;
-}
+var isTempHot = temp => temp > 19
 
 function cityIsHot(temps) {
   return _.every(temps, isTempHot)
@@ -27,5 +25,4 @@ function cityIsWarm(temps) {
   return _.some(temps, isTempHot)
 }
 
- 
 module.exports = SortCitiesByTemp;

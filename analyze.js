@@ -6,7 +6,7 @@ var analyze_this = function(freelancers) {
     return sum += freelancer.income
   },0) / _.size(freelancers)
 
-  underperform =_.chain(freelancers)
+  underperform = _.chain(freelancers)
     .filter(freelancer => freelancer.income <= avg_income)
     .sortBy('income')
 
